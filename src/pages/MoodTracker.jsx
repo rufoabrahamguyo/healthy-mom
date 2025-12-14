@@ -16,6 +16,12 @@ const MoodTracker = () => {
   const [todayMood, setTodayMood] = useState(null);
   const [notes, setNotes] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [editingMood, setEditingMood] = useState(null);
+  const [editMoodValue, setEditMoodValue] = useState('');
+  const [editNotes, setEditNotes] = useState('');
+  const [showBreathingExercise, setShowBreathingExercise] = useState(false);
+  const [showSleepTips, setShowSleepTips] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const moodOptions = [
     { icon: MoodIcons.happy, value: 'happy', label: language === 'en' ? 'Happy' : 'Furaha' },
@@ -45,6 +51,7 @@ const MoodTracker = () => {
       if (todayEntry) {
         setTodayMood(todayEntry.mood);
         setNotes(todayEntry.notes || '');
+        setHasUnsavedChanges(false);
       }
     }
   }, [moods]);
@@ -52,10 +59,18 @@ const MoodTracker = () => {
   const loadMoods = async () => {
     try {
       setLoading(true);
-      const response = await userDataAPI.getData('mood');
-      if (response.success && response.data && response.data.entries) {
-        setMoods(response.data.entries);
-        localStorage.setItem('moodHistory', JSON.stringify(response.data.entries));
+      if (isAuthenticated) {
+        const response = await userDataAPI.getMoods();
+        if (response.success && response.moods) {
+          setMoods(response.moods);
+          localStorage.setItem('moodHistory', JSON.stringify(response.moods));
+        } else {
+          // Fallback to localStorage
+          const saved = localStorage.getItem('moodHistory');
+          if (saved) {
+            setMoods(JSON.parse(saved));
+          }
+        }
       } else {
         // Fallback to localStorage
         const saved = localStorage.getItem('moodHistory');
@@ -75,17 +90,26 @@ const MoodTracker = () => {
     }
   };
 
-  const handleMoodSelect = async (moodValue) => {
+  const handleMoodSelect = (moodValue) => {
     setTodayMood(moodValue);
-    await saveMood(moodValue, notes);
+    setHasUnsavedChanges(true);
   };
 
-  const handleNotesChange = async (e) => {
+  const handleNotesChange = (e) => {
     const newNotes = e.target.value;
     setNotes(newNotes);
-    if (todayMood) {
-      await saveMood(todayMood, newNotes);
+    setHasUnsavedChanges(true);
+  };
+
+  const handleSave = async () => {
+    if (!todayMood) {
+      alert(language === 'en' 
+        ? 'Please select a mood first'
+        : 'Tafadhali chagua mhemko kwanza');
+      return;
     }
+    await saveMood(todayMood, notes);
+    setHasUnsavedChanges(false);
   };
 
   const saveMood = async (mood, notesText) => {
@@ -102,6 +126,7 @@ const MoodTracker = () => {
       updatedMoods.sort((a, b) => new Date(b.date) - new Date(a.date));
       setMoods(updatedMoods);
       localStorage.setItem('moodHistory', JSON.stringify(updatedMoods));
+      setHasUnsavedChanges(false);
       return;
     }
 
@@ -120,9 +145,71 @@ const MoodTracker = () => {
       
       // Sync to MongoDB
       await userDataAPI.saveData('mood', { entries: updatedMoods });
+      setHasUnsavedChanges(false);
     } catch (error) {
       console.error('Error saving mood:', error);
       // Data still saved to localStorage, so continue
+      setHasUnsavedChanges(false);
+    }
+  };
+
+  const handleEditMood = (entry) => {
+    setEditingMood(entry.date);
+    setEditMoodValue(entry.mood);
+    setEditNotes(entry.notes || '');
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editingMood) return;
+
+    try {
+      const updatedMoods = moods.map(m => 
+        m.date === editingMood 
+          ? { ...m, mood: editMoodValue, notes: editNotes }
+          : m
+      );
+      updatedMoods.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setMoods(updatedMoods);
+      localStorage.setItem('moodHistory', JSON.stringify(updatedMoods));
+
+      if (isAuthenticated) {
+        await userDataAPI.updateMood(editingMood, {
+          mood: editMoodValue,
+          notes: editNotes
+        });
+      }
+
+      setEditingMood(null);
+      setEditMoodValue('');
+      setEditNotes('');
+    } catch (error) {
+      console.error('Error updating mood:', error);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingMood(null);
+    setEditMoodValue('');
+    setEditNotes('');
+  };
+
+  const handleDeleteMood = async (date) => {
+    if (!window.confirm(language === 'en' 
+      ? 'Are you sure you want to delete this mood entry?'
+      : 'Je, una uhakika unataka kufuta kiingilio hiki cha mhemko?')) {
+      return;
+    }
+
+    try {
+      const updatedMoods = moods.filter(m => m.date !== date);
+      setMoods(updatedMoods);
+      localStorage.setItem('moodHistory', JSON.stringify(updatedMoods));
+
+      if (isAuthenticated) {
+        await userDataAPI.deleteMood(date);
+      }
+    } catch (error) {
+      console.error('Error deleting mood:', error);
     }
   };
 
@@ -187,6 +274,15 @@ const MoodTracker = () => {
           rows="4"
           className="mood-notes"
         />
+        <div className="save-section">
+          <button 
+            onClick={handleSave} 
+            className="save-mood-btn"
+            disabled={!todayMood}
+          >
+            {language === 'en' ? 'Save Mood' : 'Hifadhi Mhemko'}
+          </button>
+        </div>
       </div>
 
       {insights && (
@@ -216,7 +312,7 @@ const MoodTracker = () => {
             <p>{language === 'en' 
               ? 'Try deep breathing exercises to help manage stress and anxiety.'
               : 'Jaribu mazoezi ya kupumua kwa kina ili kusaidia kusimamia mfadhaiko na wasiwasi.'}</p>
-            <button className="support-btn">
+            <button className="support-btn" onClick={() => setShowBreathingExercise(true)}>
               {language === 'en' ? 'Start Breathing Exercise' : 'Anza Zoezi la Kupumua'}
             </button>
           </div>
@@ -242,7 +338,7 @@ const MoodTracker = () => {
             <p>{language === 'en' 
               ? 'Pregnancy-safe sleep tips and relaxation techniques.'
               : 'Vidokezo vya kulala salama wakati wa ujauzito na mbinu za kutuliza.'}</p>
-            <button className="support-btn">
+            <button className="support-btn" onClick={() => setShowSleepTips(true)}>
               {language === 'en' ? 'View Sleep Tips' : 'Angalia Vidokezo vya Kulala'}
             </button>
           </div>
@@ -255,26 +351,127 @@ const MoodTracker = () => {
           <div className="mood-history">
             {moods.slice(0, 7).map((entry, index) => {
               const moodOption = moodOptions.find(m => m.value === entry.mood);
+              const isEditing = editingMood === entry.date;
+              
               return (
-                <div key={index} className="history-entry">
-                  <div className="history-date">
-                    {new Date(entry.date).toLocaleDateString(language === 'en' ? 'en-US' : 'sw-KE', { 
-                      month: 'short', 
-                      day: 'numeric' 
-                    })}
-                  </div>
-                  <div className="history-mood">
-                    <span className="history-emoji">
-                      {moodOption?.icon && <moodOption.icon size={24} />}
-                    </span>
-                    <span>{moodOption?.label}</span>
-                  </div>
-                  {entry.notes && (
-                    <div className="history-notes">{entry.notes}</div>
+                <div key={`${entry.date}-${index}`} className="history-entry">
+                  {isEditing ? (
+                    <div className="edit-mood-form">
+                      <select 
+                        value={editMoodValue} 
+                        onChange={(e) => setEditMoodValue(e.target.value)}
+                        className="edit-mood-select"
+                      >
+                        {moodOptions.map(m => (
+                          <option key={m.value} value={m.value}>{m.label}</option>
+                        ))}
+                      </select>
+                      <textarea
+                        value={editNotes}
+                        onChange={(e) => setEditNotes(e.target.value)}
+                        placeholder={language === 'en' ? 'Notes...' : 'Maelezo...'}
+                        className="edit-notes-input"
+                        rows="2"
+                      />
+                      <div className="edit-actions">
+                        <button onClick={handleSaveEdit} className="save-btn">
+                          {language === 'en' ? 'Save' : 'Hifadhi'}
+                        </button>
+                        <button onClick={handleCancelEdit} className="cancel-btn">
+                          {language === 'en' ? 'Cancel' : 'Ghairi'}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="history-header-row">
+                        <div className="history-date">
+                          {new Date(entry.date).toLocaleDateString(language === 'en' ? 'en-US' : 'sw-KE', { 
+                            month: 'short', 
+                            day: 'numeric' 
+                          })}
+                        </div>
+                        <div className="history-actions">
+                          <button 
+                            onClick={() => handleEditMood(entry)} 
+                            className="edit-mood-btn"
+                            title={language === 'en' ? 'Edit' : 'Hariri'}
+                          >
+                            <Icons.edit size={16} />
+                          </button>
+                          <button 
+                            onClick={() => handleDeleteMood(entry.date)} 
+                            className="delete-mood-btn"
+                            title={language === 'en' ? 'Delete' : 'Futa'}
+                          >
+                            <Icons.delete size={16} />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="history-mood">
+                        <span className="history-emoji">
+                          {moodOption?.icon && <moodOption.icon size={24} />}
+                        </span>
+                        <span>{moodOption?.label}</span>
+                      </div>
+                      {entry.notes && (
+                        <div className="history-notes">{entry.notes}</div>
+                      )}
+                    </>
                   )}
                 </div>
               );
             })}
+          </div>
+        </div>
+      )}
+
+      {showBreathingExercise && (
+        <div className="modal-overlay" onClick={() => setShowBreathingExercise(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowBreathingExercise(false)}>
+              ×
+            </button>
+            <h3>{language === 'en' ? 'Breathing Exercise' : 'Zoezi la Kupumua'}</h3>
+            <div className="breathing-exercise">
+              <p>{language === 'en' 
+                ? 'Follow these steps for deep breathing:'
+                : 'Fuata hatua hizi za kupumua kwa kina:'}</p>
+              <ol>
+                <li>{language === 'en' ? 'Sit comfortably or lie down' : 'Keti vizuri au lala chini'}</li>
+                <li>{language === 'en' ? 'Breathe in slowly through your nose for 4 counts' : 'Pumua polepole kupitia pua yako kwa hesabu 4'}</li>
+                <li>{language === 'en' ? 'Hold your breath for 4 counts' : 'Shika pumzi yako kwa hesabu 4'}</li>
+                <li>{language === 'en' ? 'Exhale slowly through your mouth for 4 counts' : 'Toa pumzi polepole kupitia mdomo wako kwa hesabu 4'}</li>
+                <li>{language === 'en' ? 'Repeat 5-10 times' : 'Rudia mara 5-10'}</li>
+              </ol>
+              <p className="breathing-tip">
+                {language === 'en' 
+                  ? 'This exercise can help reduce stress and anxiety. Practice daily for best results.'
+                  : 'Zoezi hili linaweza kusaidia kupunguza mfadhaiko na wasiwasi. Fanya kila siku kwa matokeo bora.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSleepTips && (
+        <div className="modal-overlay" onClick={() => setShowSleepTips(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowSleepTips(false)}>
+              ×
+            </button>
+            <h3>{language === 'en' ? 'Sleep Tips for Pregnancy' : 'Vidokezo vya Kulala Wakati wa Ujauzito'}</h3>
+            <div className="sleep-tips">
+              <ul>
+                <li>{language === 'en' ? 'Sleep on your left side to improve blood flow to your baby' : 'Lala upande wako wa kushoto ili kuboresha mtiririko wa damu kwa mtoto wako'}</li>
+                <li>{language === 'en' ? 'Use pillows to support your belly and between your knees' : 'Tumia mto kusaidia tumbo lako na kati ya magoti yako'}</li>
+                <li>{language === 'en' ? 'Avoid caffeine and large meals before bedtime' : 'Epuka kafeini na chakula kikubwa kabla ya kulala'}</li>
+                <li>{language === 'en' ? 'Establish a regular sleep schedule' : 'Weka ratiba ya kulala ya kawaida'}</li>
+                <li>{language === 'en' ? 'Create a relaxing bedtime routine (warm bath, reading, gentle music)' : 'Unda desturi ya kutuliza kabla ya kulala (kuoga maji ya joto, kusoma, muziki wa polepole)'}</li>
+                <li>{language === 'en' ? 'Keep your bedroom cool, dark, and quiet' : 'Weka chumba chako cha kulala kiwe baridi, giza, na kimya'}</li>
+                <li>{language === 'en' ? 'Practice relaxation techniques like deep breathing before bed' : 'Fanya mbinu za kutuliza kama kupumua kwa kina kabla ya kulala'}</li>
+              </ul>
+            </div>
           </div>
         </div>
       )}

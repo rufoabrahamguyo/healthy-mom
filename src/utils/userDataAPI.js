@@ -378,6 +378,66 @@ export const userDataAPI = {
       throw error;
     }
   },
+
+  // Mood methods
+  getMoods: async () => {
+    try {
+      const response = await apiRequest('/user/data/mood');
+      if (response.success && response.data && response.data.entries) {
+        return { success: true, moods: response.data.entries };
+      }
+      return { success: true, moods: [] };
+    } catch (error) {
+      console.error('Error getting moods:', error);
+      return { success: false, moods: [] };
+    }
+  },
+
+  updateMood: async (date, moodData) => {
+    try {
+      const existingResponse = await apiRequest('/user/data/mood');
+      const existingData = existingResponse.success && existingResponse.data 
+        ? existingResponse.data 
+        : { entries: [] };
+
+      const updatedEntries = existingData.entries.map(m => 
+        m.date === date ? { ...m, ...moodData } : m
+      );
+
+      return await apiRequest('/user/data', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          dataType: 'mood', 
+          data: { entries: updatedEntries } 
+        }),
+      });
+    } catch (error) {
+      console.error('Error updating mood:', error);
+      throw error;
+    }
+  },
+
+  deleteMood: async (date) => {
+    try {
+      const existingResponse = await apiRequest('/user/data/mood');
+      const existingData = existingResponse.success && existingResponse.data 
+        ? existingResponse.data 
+        : { entries: [] };
+
+      const filteredEntries = existingData.entries.filter(m => m.date !== date);
+
+      return await apiRequest('/user/data', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          dataType: 'mood', 
+          data: { entries: filteredEntries } 
+        }),
+      });
+    } catch (error) {
+      console.error('Error deleting mood:', error);
+      throw error;
+    }
+  },
 };
 
 export default userDataAPI;

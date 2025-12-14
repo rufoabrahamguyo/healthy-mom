@@ -32,6 +32,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .timer-display {
@@ -40,12 +42,23 @@
   color: #D8A7AA; /* Deep Rose */
   font-family: 'Courier New', monospace;
   margin: 1rem 0;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .timer-label {
   color: #666;
   font-size: 1.1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem 0;
+  min-height: 1.5rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .start-contraction-btn,
@@ -78,6 +91,14 @@
 .stop-contraction-btn:hover {
   background: #b71c1c;
   transform: translateY(-2px);
+}
+
+.active-timer,
+.ready-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .active-timer {

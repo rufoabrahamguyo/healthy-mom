@@ -24,7 +24,20 @@ const ContractionTimer = () => {
     } else {
       const saved = localStorage.getItem('contractionHistory');
       if (saved) {
-        setContractions(JSON.parse(saved));
+        try {
+          const parsed = JSON.parse(saved);
+          // Normalize localStorage data to match API format
+          const normalized = parsed.map(c => ({
+            startTime: typeof c.startTime === 'string' ? new Date(c.startTime).getTime() : c.startTime,
+            endTime: typeof c.endTime === 'string' ? new Date(c.endTime).getTime() : c.endTime,
+            duration: c.duration || 0,
+            time: c.time || new Date(c.startTime).toISOString()
+          }));
+          setContractions(normalized);
+        } catch (error) {
+          console.error('Error parsing contraction history:', error);
+          setContractions([]);
+        }
       }
       setLoading(false);
     }
@@ -58,16 +71,36 @@ const ContractionTimer = () => {
     try {
       setLoading(true);
       const response = await userDataAPI.getContractions();
-      if (response.success) {
-        setContractions(response.contractions.map(c => ({
-          startTime: new Date(c.startTime).getTime(),
-          endTime: new Date(c.endTime).getTime(),
-          duration: c.duration,
-          time: c.startTime
-        })));
+      if (response.success && response.contractions) {
+        const normalized = response.contractions.map(c => ({
+          startTime: typeof c.startTime === 'string' ? new Date(c.startTime).getTime() : c.startTime,
+          endTime: typeof c.endTime === 'string' ? new Date(c.endTime).getTime() : c.endTime,
+          duration: c.duration || 0,
+          time: c.startTime || c.time || new Date().toISOString()
+        }));
+        setContractions(normalized);
+      } else {
+        setContractions([]);
       }
     } catch (error) {
       console.error('Error loading contractions:', error);
+      // Fallback to localStorage if API fails
+      const saved = localStorage.getItem('contractionHistory');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const normalized = parsed.map(c => ({
+            startTime: typeof c.startTime === 'string' ? new Date(c.startTime).getTime() : c.startTime,
+            endTime: typeof c.endTime === 'string' ? new Date(c.endTime).getTime() : c.endTime,
+            duration: c.duration || 0,
+            time: c.time || new Date(c.startTime).toISOString()
+          }));
+          setContractions(normalized);
+        } catch (parseError) {
+          console.error('Error parsing localStorage contractions:', parseError);
+          setContractions([]);
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -84,6 +117,10 @@ const ContractionTimer = () => {
       time: new Date().toISOString()
     };
 
+    // Always update local state immediately for better UX
+    const updated = [...contractions, newContraction];
+    setContractions(updated);
+
     if (isAuthenticated) {
       try {
         await userDataAPI.saveContraction({
@@ -94,10 +131,10 @@ const ContractionTimer = () => {
         await loadContractions();
       } catch (error) {
         console.error('Error saving contraction:', error);
+        // Fallback to localStorage if API fails
+        localStorage.setItem('contractionHistory', JSON.stringify(updated));
       }
     } else {
-      const updated = [...contractions, newContraction];
-      setContractions(updated);
       localStorage.setItem('contractionHistory', JSON.stringify(updated));
     }
 
@@ -271,14 +308,21 @@ const ContractionTimer = () => {
             </div>
             <div className="contraction-list">
               {contractions.slice(-10).reverse().map((contraction, index) => {
-                const interval = index < contractions.length - 1
-                  ? Math.floor((contraction.startTime - contractions[contractions.length - 2 - index].endTime) / 1000 / 60)
+                // Calculate interval from previous contraction
+                const reversedList = contractions.slice(-10).reverse();
+                const interval = index > 0 && reversedList[index - 1]
+                  ? Math.floor((contraction.startTime - reversedList[index - 1].endTime) / 1000 / 60)
                   : null;
                 
+                // Ensure startTime is a valid timestamp
+                const startTime = typeof contraction.startTime === 'number' 
+                  ? contraction.startTime 
+                  : new Date(contraction.startTime).getTime();
+                
                 return (
-                  <div key={index} className="contraction-item">
+                  <div key={`${contraction.startTime}-${index}`} className="contraction-item">
                     <div className="contraction-time">
-                      {new Date(contraction.startTime).toLocaleTimeString(language === 'en' ? 'en-US' : 'sw-KE', {
+                      {new Date(startTime).toLocaleTimeString(language === 'en' ? 'en-US' : 'sw-KE', {
                         hour: '2-digit',
                         minute: '2-digit',
                         second: '2-digit'
@@ -286,9 +330,9 @@ const ContractionTimer = () => {
                     </div>
                     <div className="contraction-details">
                       <span className="duration">
-                        {formatTime(contraction.duration)}
+                        {formatTime(contraction.duration || 0)}
                       </span>
-                      {interval !== null && (
+                      {interval !== null && interval >= 0 && (
                         <span className="interval">
                           {language === 'en' ? `${interval} min since previous` : `${interval} dakika tangu ya awali`}
                         </span>
