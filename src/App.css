@@ -1,0 +1,75 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('/home.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.app > * {
+  position: relative;
+  z-index: 1;
+}
+
+.main-content {
+  flex: 1;
+  padding-bottom: 2rem;
+}
+
+.app-footer {
+  background: white;
+  padding: 1rem;
+  text-align: center;
+  border-top: 2px solid #e0e0e0;
+  margin-top: auto;
+}
+
+.disclaimer {
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.disclaimer-sw {
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+  .main-content {
+    padding-bottom: 1rem;
+  }
+  
+  .app-footer {
+    padding: 0.75rem;
+  }
+  
+  .disclaimer,
+  .disclaimer-sw {
+    font-size: 0.8rem;
+  }
+}

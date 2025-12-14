@@ -1,0 +1,41 @@
+.app-footer {
+  width: 100%;
+  padding: 2rem 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(216, 167, 170, 0.2);
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-text {
+  color: #000000;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.footer-copyright {
+  color: #000000;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .app-footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-text {
+    font-size: 0.85rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
+  }
+}
+

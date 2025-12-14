@@ -1,0 +1,372 @@
+.forum {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.forum h2 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.forum-header {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.forum-description {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.ask-question-btn {
+  background: #D8A7AA; /* Deep Rose - Buttons */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.ask-question-btn:hover {
+  background: #F6D3D1; /* Antique Rose - Hover */
+}
+
+.question-form {
+  margin-top: 1rem;
+}
+
+.question-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+  margin-bottom: 0.75rem;
+}
+
+.question-input:focus {
+  outline: none;
+  border-color: #D8A7AA; /* Deep Rose */
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-btn {
+  background: #D8A7AA; /* Deep Rose - Buttons */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.post-btn:hover {
+  background: #F6D3D1; /* Antique Rose - Hover */
+}
+
+.cancel-btn {
+  background: #f5f5f5;
+  color: #666;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: #e0e0e0;
+}
+
+.anonymous-note {
+  font-size: 0.85rem;
+  color: #999;
+  margin: 0;
+  font-style: italic;
+}
+
+.questions-list h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.no-questions {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+}
+
+.question-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.anonymous-badge {
+  background: #f0f0ff;
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.question-time {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.question-text {
+  color: #333;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  font-size: 1.05rem;
+}
+
+.answers-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #f0f0f0;
+}
+
+.answers-section h4 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+.answer-card {
+  background: #FFEBEC; /* Rose Quartz */
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #D8A7AA; /* Deep Rose */
+}
+
+.answer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.answer-author {
+  color: #D8A7AA; /* Mauve Pink */
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.verified-badge-small {
+  background: #2e7d32;
+  color: white;
+  padding: 0.15rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.answer-text {
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.no-answers {
+  color: #999;
+  font-style: italic;
+  margin: 0;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn,
+.delete-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  opacity: 1;
+  background: rgba(216, 167, 170, 0.1);
+  color: #D8A7AA;
+}
+
+.edit-form {
+  margin: 1rem 0;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.save-btn {
+  background: #D8A7AA;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+  background: #C8969A;
+}
+
+.comment-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.comment-btn {
+  background: #F6D3D1;
+  color: #333;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comment-btn:hover {
+  background: #E9CDCC;
+}
+
+.comment-form {
+  margin-top: 0.5rem;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+}
+
+.comment-input:focus {
+  outline: none;
+  border-color: #D8A7AA;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.post-comment-btn {
+  background: #D8A7AA;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.post-comment-btn:hover {
+  background: #C8969A;
+}
+
+.cancel-comment-btn {
+  background: transparent;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.cancel-comment-btn:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 480px) {
+  .forum {
+    padding: 0.75rem;
+  }
+  
+  .question-card {
+    padding: 1rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .post-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}
+

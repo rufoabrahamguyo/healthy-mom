@@ -1,0 +1,181 @@
+.health-library {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.health-library h2 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-bar {
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #D8A7AA; /* Deep Rose */
+}
+
+.categories {
+  margin-bottom: 2rem;
+}
+
+.categories h3 {
+  color: #333;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.category-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid #D8A7AA; /* Deep Rose */
+  background: white;
+  color: #D8A7AA; /* Deep Rose */
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+  background: #FFEBEC; /* Rose Quartz */
+}
+
+.category-btn.active {
+  background: #D8A7AA; /* Deep Rose */
+  color: white;
+}
+
+.articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.article-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.article-card h3 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin: 0 0 0.75rem 0;
+  font-size: 1.2rem;
+}
+
+.article-meta {
+  margin-bottom: 1rem;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #FFEBEC; /* Rose Quartz */
+  color: #D8A7AA; /* Mauve Pink */
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.article-content {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.myth-busting {
+  background: #fff9e6;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid #ffd700;
+}
+
+.myth {
+  margin-bottom: 0.5rem;
+  color: #d32f2f;
+}
+
+.truth {
+  color: #2e7d32;
+}
+
+.audio-btn {
+  background: #D8A7AA; /* Deep Rose - Buttons */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.audio-btn:hover {
+  background: #F6D3D1; /* Antique Rose - Hover */
+}
+
+.audio-btn.playing {
+  background: #d32f2f;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.audio-btn.playing:hover {
+  background: #b71c1c;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.no-articles {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+}
+
+@media (max-width: 480px) {
+  .health-library {
+    padding: 0.75rem;
+  }
+  
+  .article-card {
+    padding: 1rem;
+  }
+  
+  .category-buttons {
+    gap: 0.25rem;
+  }
+  
+  .category-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+

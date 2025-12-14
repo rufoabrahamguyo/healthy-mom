@@ -1,0 +1,248 @@
+.mood-tracker {
+  padding: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.mood-tracker h2 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.mood-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.mood-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.mood-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mood-btn:hover {
+  border-color: #D8A7AA; /* Deep Rose */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(197, 106, 135, 0.2);
+}
+
+.mood-btn.selected {
+  border-color: #D8A7AA; /* Deep Rose */
+  background: #FFEBEC; /* Rose Quartz */
+}
+
+.mood-emoji {
+  font-size: 2.5rem;
+}
+
+.mood-label {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.notes-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.notes-section label {
+  display: block;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.mood-notes {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.mood-notes:focus {
+  outline: none;
+  border-color: #D8A7AA; /* Deep Rose */
+}
+
+.insights-section {
+  background: #FFEBEC; /* Rose Quartz */
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #D8A7AA; /* Deep Rose */
+}
+
+.insights-section h3 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin-bottom: 1rem;
+}
+
+.insight-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.insight-emoji {
+  font-size: 3rem;
+}
+
+.insight-text {
+  color: #555;
+  line-height: 1.6;
+}
+
+.support-section {
+  margin-bottom: 1.5rem;
+}
+
+.support-section h3 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin-bottom: 1rem;
+}
+
+.support-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.support-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.support-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.support-card h4 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin: 0.5rem 0;
+}
+
+.support-card p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.support-btn {
+  background: #D8A7AA; /* Deep Rose - Buttons */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.support-btn:hover {
+  background: #F6D3D1; /* Antique Rose - Hover */
+  transform: translateY(-2px);
+}
+
+.history-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.history-section h3 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin-bottom: 1rem;
+}
+
+.mood-history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.history-entry {
+  padding: 1rem;
+  background: #FFEBEC; /* Rose Quartz */
+  border-radius: 8px;
+  border-left: 3px solid #D8A7AA; /* Deep Rose */
+}
+
+.history-date {
+  font-weight: 600;
+  color: #D8A7AA; /* Mauve Pink */
+  margin-bottom: 0.5rem;
+}
+
+.history-mood {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.history-emoji {
+  font-size: 1.5rem;
+}
+
+.history-notes {
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .mood-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .support-cards {
+    grid-template-columns: 1fr;
+  }
+}
+

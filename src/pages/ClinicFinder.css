@@ -1,0 +1,200 @@
+.clinic-finder {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.clinic-finder h2 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-controls {
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #D8A7AA; /* Deep Rose */
+}
+
+.sort-options {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sort-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.sort-options input[type="radio"] {
+  cursor: pointer;
+}
+
+.clinics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.clinic-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.verified-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #2e7d32;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.clinic-card h3 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin: 0 0 0.75rem 0;
+  font-size: 1.2rem;
+  padding-right: 100px;
+}
+
+.clinic-info {
+  margin-bottom: 1rem;
+}
+
+.clinic-type {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.clinic-location {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.ratings {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.rating-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.rating-item:last-child {
+  margin-bottom: 0;
+}
+
+.rating-label {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.rating-stars {
+  color: #ffd700;
+  font-size: 1.1rem;
+}
+
+.clinic-services {
+  margin: 1rem 0;
+}
+
+.clinic-services strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.services-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.service-tag {
+  background: #FFEBEC; /* Rose Quartz */
+  color: #D8A7AA; /* Mauve Pink */
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.call-btn {
+  display: inline-block;
+  background: #D8A7AA; /* Deep Rose - Buttons */
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.call-btn:hover {
+  background: #F6D3D1; /* Antique Rose - Hover */
+}
+
+.no-clinics {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+}
+
+@media (max-width: 480px) {
+  .clinic-finder {
+    padding: 0.75rem;
+  }
+  
+  .clinic-card {
+    padding: 1rem;
+  }
+  
+  .clinic-card h3 {
+    padding-right: 0;
+    font-size: 1.1rem;
+  }
+  
+  .verified-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sort-options {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+

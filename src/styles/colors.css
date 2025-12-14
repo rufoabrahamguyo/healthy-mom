@@ -1,0 +1,26 @@
+/* Color Palette - Purple Theme */
+:root {
+  /* Primary Colors */
+  --lavender-light: #E6E6FA;      /* Lightest - backgrounds, cards */
+  --lavender: #B19CD9;            /* Medium-light - accents, hover states */
+  --purple: #9370DB;              /* Primary - buttons, main actions */
+  --purple-medium: #7B68EE;      /* Medium - active states */
+  --purple-dark: #6A5ACD;        /* Dark - headers, important text */
+  --deep-purple: #5B4A9C;        /* Darkest - hover, emphasis */
+  
+  /* Semantic Colors */
+  --primary: var(--purple);
+  --primary-hover: var(--purple-dark);
+  --primary-dark: var(--deep-purple);
+  --secondary: var(--lavender);
+  --accent: var(--purple-medium);
+  --background-light: var(--lavender-light);
+  --text-primary: #333;
+  --text-secondary: #666;
+  --border-color: var(--lavender);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #9370DB 0%, #6A5ACD 100%);
+  --gradient-light: linear-gradient(135deg, #E6E6FA 0%, #B19CD9 100%);
+}
+

@@ -1,0 +1,192 @@
+.baby-prep {
+  padding: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.baby-prep h2 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.prep-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.prep-section h3 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin-bottom: 1rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.progress-bar {
+  position: relative;
+  width: 150px;
+  height: 30px;
+  background: #f0f0f0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #D8A7AA; /* Deep Rose - Buttons */
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  z-index: 1;
+}
+
+.checklist-category {
+  margin-bottom: 2rem;
+}
+
+.checklist-category:last-child {
+  margin-bottom: 0;
+}
+
+.checklist-category h4 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+}
+
+.checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checklist-item:hover {
+  background: #f0f0f0;
+}
+
+.checklist-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #D8A7AA; /* Deep Rose */
+}
+
+.checklist-item span {
+  flex: 1;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.checklist-item span.checked {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.birth-plan-info {
+  margin-top: 1rem;
+}
+
+.birth-plan-info > p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.birth-plan-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.plan-section {
+  background: #f9f9f9;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border-left: 4px solid #D8A7AA; /* Deep Rose */
+}
+
+.plan-section h4 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.plan-section ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #555;
+  line-height: 1.8;
+}
+
+.plan-section li {
+  margin-bottom: 0.5rem;
+}
+
+.birth-plan-note {
+  background: #fff9e6;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #ffd700;
+  margin-top: 1rem;
+}
+
+.birth-plan-note p {
+  margin: 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.birth-plan-note strong {
+  color: #333;
+}
+
+@media (max-width: 480px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .progress-bar {
+    width: 100%;
+  }
+  
+  .birth-plan-sections {
+    grid-template-columns: 1fr;
+  }
+}
+

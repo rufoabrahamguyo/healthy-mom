@@ -1,0 +1,257 @@
+.kick-counter {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.kick-counter h2 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.info-card {
+  background: #fff9e6;
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid #ffd700;
+  margin-bottom: 1.5rem;
+}
+
+.info-text {
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.counter-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.session-info {
+  margin-bottom: 2rem;
+}
+
+.timer {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #D8A7AA; /* Deep Rose */
+  font-family: 'Courier New', monospace;
+}
+
+.session-status {
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.kick-display {
+  margin: 2rem 0;
+}
+
+.kick-count-large {
+  font-size: 5rem;
+  font-weight: 700;
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  line-height: 1;
+}
+
+.kick-label {
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.start-btn,
+.kick-btn,
+.stop-btn,
+.reset-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-btn {
+  background: #D8A7AA; /* Deep Rose - Buttons */
+  color: white;
+}
+
+.start-btn:hover {
+  background: #F6D3D1; /* Antique Rose - Hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(115, 22, 67, 0.4);
+}
+
+.kick-btn {
+  background: #D8A7AA; /* Deep Rose - Buttons */
+  color: white;
+  font-size: 1.2rem;
+  padding: 1.25rem 2.5rem;
+}
+
+.kick-btn:hover {
+  background: #F6D3D1; /* Antique Rose - Hover */
+  transform: scale(1.05);
+}
+
+.kick-btn:active {
+  transform: scale(0.95);
+}
+
+.stop-btn {
+  background: #d32f2f;
+  color: white;
+}
+
+.stop-btn:hover {
+  background: #b71c1c;
+}
+
+.reset-btn {
+  background: #f5f5f5;
+  color: #666;
+  border: 2px solid #ddd;
+}
+
+.reset-btn:hover {
+  background: #e0e0e0;
+}
+
+.insights-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.insights-section h3 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin-bottom: 1rem;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.insight-item {
+  text-align: center;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.insight-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #D8A7AA; /* Mauve Pink - Headers */
+}
+
+.insight-label {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.alert-card {
+  background: #ffebee;
+  border-left: 4px solid #d32f2f;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.alert-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.alert-card p {
+  color: #d32f2f;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.history-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.history-section h3 {
+  color: #D8A7AA; /* Mauve Pink - Headers */
+  margin-bottom: 1rem;
+}
+
+.kick-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kick-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border-left: 3px solid #D8A7AA; /* Deep Rose */
+}
+
+.kick-time {
+  font-weight: 600;
+  color: #333;
+}
+
+.kick-session-time {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .kick-count-large {
+    font-size: 4rem;
+  }
+  
+  .timer {
+    font-size: 2.5rem;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .start-btn,
+  .kick-btn,
+  .stop-btn,
+  .reset-btn {
+    width: 100%;
+  }
+}
+
