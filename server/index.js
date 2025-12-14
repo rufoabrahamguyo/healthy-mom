@@ -40,11 +40,11 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/uzazi-
 
 mongoose.connect(MONGODB_URI)
   .then(() => {
-    console.log('✅ Connected to MongoDB');
-    console.log(`📊 Database: ${mongoose.connection.name}`);
+    console.log(' Connected to MongoDB');
+    console.log(` Database: ${mongoose.connection.name}`);
   })
   .catch((error) => {
-    console.error('❌ MongoDB connection error:', error);
+    console.error(' MongoDB connection error:', error);
   });
 
 // Request logging middleware (for debugging)
@@ -70,7 +70,7 @@ app.get('/api/health', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📝 API endpoints available at http://localhost:${PORT}/api`);
+  console.log(` Server running on http://localhost:${PORT}`);
+  console.log(` API endpoints available at http://localhost:${PORT}/api`);
 });
 
